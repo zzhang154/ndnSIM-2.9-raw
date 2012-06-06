@@ -48,6 +48,8 @@ NS_LOG_COMPONENT_DEFINE ("PrintIntrospectedDoxygen");
 
 namespace
 {
+  std::string g_showGroupOnly;     ///< command-line option to retrospect a selected group
+
   /**
    * Markup tokens.
    * @{
@@ -1071,7 +1073,9 @@ PrintAllAttributes (std::ostream & os)
       // Get the class's index out of the map;
       TypeId tid = TypeId::GetRegistered (item.second);
       
-      if (tid.GetAttributeN () == 0 )
+        if (tid.GetAttributeN () == 0 ||
+            tid.MustHideFromDocumentation () ||
+            (!g_showGroupOnly.empty() && tid.GetGroupName () != g_showGroupOnly))
 	{
 	  continue;
 	}
@@ -1229,7 +1233,9 @@ PrintAllTraceSources (std::ostream & os)
       // Get the class's index out of the map;
       TypeId tid = TypeId::GetRegistered (item.second);
 
-      if (tid.GetTraceSourceN () == 0 )
+        if (tid.GetTraceSourceN () == 0 ||
+            tid.MustHideFromDocumentation () ||
+            (!g_showGroupOnly.empty() && tid.GetGroupName () != g_showGroupOnly))
 	{
 	  continue;
 	}
@@ -1470,6 +1476,7 @@ typedef struct {
   const std::string m_type;   //!< The name of the underlying type.
   const bool m_seeBase;       //!< Print a "see also" pointing to the base class.
   const std::string m_header; //!< The header file name.
+  const std::string m_group;  //!< Group name
 } AttributeDescriptor;
 
 
@@ -1551,34 +1558,41 @@ PrintAttributeImplementations (std::ostream & os)
   int i = 0;
   while (attributes[i].m_name != "")
     {
+      if (!g_showGroupOnly.empty() && attributes[i].m_name != g_showGroupOnly)
+        {
+           continue;
+        }
       PrintAttributeHelper (os, attributes[i]);
       ++i;
     }
 
   // Special cases
-  PrintAttributeValueSection  (os, "EmptyAttribute", false);
-  PrintAttributeValueWithName (os, "EmptyAttribute", "EmptyAttribute",
+  if (!g_showGroupOnly.empty() && g_showGroupOnly == "Core")
+  {
+    PrintAttributeValueSection  (os, "EmptyAttribute", false);
+    PrintAttributeValueWithName (os, "EmptyAttribute", "EmptyAttribute",
                                    "attribute.h");
 
-  PrintAttributeValueSection  (os, "ObjectPtrContainer", false);
-  PrintAttributeValueWithName (os, "ObjectPtrContainer", "ObjectPtrContainer", "object-ptr-container.h");
-  PrintMakeChecker            (os, "ObjectPtrContainer",  "object-ptr-container.h");
+    PrintAttributeValueSection  (os, "ObjectPtrContainer", false);
+    PrintAttributeValueWithName (os, "ObjectPtrContainer", "ObjectPtrContainer", "object-ptr-container.h");
+    PrintMakeChecker            (os, "ObjectPtrContainer",  "object-ptr-container.h");
 
-  PrintAttributeValueSection  (os, "ObjectVector", false);
-  PrintMakeAccessors          (os, "ObjectVector");
-  PrintMakeChecker            (os, "ObjectVector", "object-vector.h");
+    PrintAttributeValueSection  (os, "ObjectVector", false);
+    PrintMakeAccessors          (os, "ObjectVector");
+    PrintMakeChecker            (os, "ObjectVector", "object-vector.h");
 
-  PrintAttributeValueSection  (os, "ObjectMap", false);
-  PrintMakeAccessors          (os, "ObjectMap");
-  PrintMakeChecker            (os, "ObjectMap", "object-map.h");
+    PrintAttributeValueSection  (os, "ObjectMap", false);
+    PrintMakeAccessors          (os, "ObjectMap");
+    PrintMakeChecker            (os, "ObjectMap", "object-map.h");
 
-  PrintAttributeValueSection  (os, "Pair", false);
-  PrintAttributeValueWithName (os, "Pair", "std::pair<A, B>", "pair.h");
-  PrintMakeChecker            (os, "Pair",  "pair.h");
+    PrintAttributeValueSection  (os, "Pair", false);
+    PrintAttributeValueWithName (os, "Pair", "std::pair<A, B>", "pair.h");
+    PrintMakeChecker            (os, "Pair",  "pair.h");
   
-  PrintAttributeValueSection  (os, "AttributeContainer", false);
-  PrintAttributeValueWithName (os, "AttributeContainer", "AttributeContainer", "attribute-container.h");
-  PrintMakeChecker            (os, "AttributeContainer",  "attribute-container.h");
+    PrintAttributeValueSection  (os, "AttributeContainer", false);
+    PrintAttributeValueWithName (os, "AttributeContainer", "AttributeContainer", "attribute-container.h");
+    PrintMakeChecker            (os, "AttributeContainer",  "attribute-container.h");
+  }
 }  // PrintAttributeImplementations ()
 
 
@@ -1595,6 +1609,7 @@ int main (int argc, char *argv[])
   cmd.Usage ("Generate documentation for all ns-3 registered types, "
 	     "trace sources, attributes and global variables.");
   cmd.AddValue ("output-text", "format output as plain text", outputText);
+  cmd.AddValue ("group", "print information only for the specified group", g_showGroupOnly);
   cmd.Parse (argc, argv);
     
   SetMarkup (outputText);
