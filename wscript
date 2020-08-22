@@ -64,7 +64,7 @@ cflags.default_profile = 'debug'
 Configure.autoconfig = 0
 
 # the following two variables are used by the target "waf dist"
-with open("VERSION", "rt") as f:
+with open("VERSION.info", "rt") as f:
     VERSION = f.read().strip()
 APPNAME = 'ns'
 
