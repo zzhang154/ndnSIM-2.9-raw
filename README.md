@@ -28,7 +28,10 @@ mv ndnSIM-2.9-raw-master ndnSIM
 NS_LOG=ndn.Consumer:ndn.Producer ./waf --run=ndn-grid
 ./waf --run=ndn-grid
 
-Download shell example:
+## comment
+Becareful to the file "/home/dd/CFNAgg-ndnSIM-2.9/.gitignore", change the item 'src/ndnSIM' to '!src/ndnSIM'. Otherwise, your VScode project cannot recognize the files within ndnSIM.
+
+# Download shell example:
 
 ## step1:
 ```bash
