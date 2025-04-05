@@ -34,31 +34,30 @@ Download shell example:
 ```bash
 dd@dd:~$ git clone -b ndnSIM-ns-3.35 https://github.com/zzhang154/ndnSIM-2.9-raw.git CFNAgg-ndnSIM-2.9
 ```
-Cloning into 'CFNAgg-ndnSIM-2.9'...
-remote: Enumerating objects: 159648, done.
-remote: Counting objects: 100% (2021/2021), done.
-remote: Compressing objects: 100% (1432/1432), done.
-remote: Total 159648 (delta 566), reused 2021 (delta 566), pack-reused 157627 (from 1)
-Receiving objects: 100% (159648/159648), 137.08 MiB | 1.99 MiB/s, done.
-Resolving deltas: 100% (129483/129483), done.
+Cloning into 'CFNAgg-ndnSIM-2.9'...<br>
+remote: Enumerating objects: 159648, done.<br>
+remote: Counting objects: 100% (2021/2021), done.<br>
+remote: Compressing objects: 100% (1432/1432), done.<br>
+remote: Total 159648 (delta 566), reused 2021 (delta 566), pack-reused 157627 (from 1)<br>
+Receiving objects: 100% (159648/159648), 137.08 MiB | 1.99 MiB/s, done.<br>
+Resolving deltas: 100% (129483/129483), done.<br>
 
 ## step2:
 ```bash
 dd@dd:~/CFNAgg-ndnSIM-2.9$ ls
 ```
-AUTHORS       contrib          examples  README.md      src          utils         waf        wscript
-bindings      CONTRIBUTING.md  LICENSE   RELEASE_NOTES  test.py      utils.py      waf.bat    wutils.py
-CHANGES.html  doc              Makefile  scratch        testpy.supp  VERSION.info  waf-tools
+AUTHORS       contrib          examples  README.md      src          utils         waf        wscript<br>
+bindings      CONTRIBUTING.md  LICENSE   RELEASE_NOTES  test.py      utils.py      waf.bat    wutils.py<br>
 ```bash
 dd@dd:~/CFNAgg-ndnSIM-2.9$ cd src
 dd@dd:~/CFNAgg-ndnSIM-2.9/src$ ls
 ```
-antenna       click         dsr            lr-wpan   network                propagation  topology-read       wifi
-aodv          config-store  energy         lte       nix-vector-routing     sixlowpan    traffic-control     wimax
-applications  core          fd-net-device  mesh      olsr                   spectrum     uan                 wscript
-bridge        csma          flow-monitor   mobility  openflow               stats        virtual-net-device
-brite         csma-layout   internet       mpi       point-to-point         tap-bridge   visualizer
-buildings     dsdv          internet-apps  netanim   point-to-point-layout  test         wave
+antenna       click         dsr            lr-wpan   network                propagation  topology-read       wifi<br>
+aodv          config-store  energy         lte       nix-vector-routing     sixlowpan    traffic-control     wimax<br>
+applications  core          fd-net-device  mesh      olsr                   spectrum     uan                 wscript<br>
+bridge        csma          flow-monitor   mobility  openflow               stats        virtual-net-device<br>
+brite         csma-layout   internet       mpi       point-to-point         tap-bridge   visualizer<br>
+buildings     dsdv          internet-apps  netanim   point-to-point-layout  test         wave<br>
 
 We can find that there is no such file named 'ndnSIM' within the ./src
 
@@ -67,22 +66,22 @@ We can find that there is no such file named 'ndnSIM' within the ./src
 dd@dd:~/CFNAgg-ndnSIM-2.9$ cd src
 dd@dd:~/CFNAgg-ndnSIM-2.9/src$ git clone -b main https://github.com/zzhang154/ndnSIM-2.9-raw.git ndnSIM
 ```
-Cloning into 'ndnSIM'...
-remote: Enumerating objects: 159648, done.
-remote: Counting objects: 100% (2021/2021), done.
-remote: Compressing objects: 100% (1432/1432), done.
-remote: Total 159648 (delta 566), reused 2021 (delta 566), pack-reused 157627 (from 1)
-Receiving objects: 100% (159648/159648), 137.08 MiB | 3.46 MiB/s, done.
-Resolving deltas: 100% (129483/129483), done.
+Cloning into 'ndnSIM'...<br>
+remote: Enumerating objects: 159648, done.<br>
+remote: Counting objects: 100% (2021/2021), done.<br>
+remote: Compressing objects: 100% (1432/1432), done.<br>
+remote: Total 159648 (delta 566), reused 2021 (delta 566), pack-reused 157627 (from 1)<br>
+Receiving objects: 100% (159648/159648), 137.08 MiB | 3.46 MiB/s, done.<br>
+Resolving deltas: 100% (129483/129483), done.<br>
 ```bash
 dd@dd:~/CFNAgg-ndnSIM-2.9/src$ ls
 ```
-antenna       click         dsr            lr-wpan   netanim             point-to-point-layout  test                wave
-aodv          config-store  energy         lte       network             propagation            topology-read       wifi
-applications  core          fd-net-device  mesh      nix-vector-routing  sixlowpan              traffic-control     wimax
-bridge        csma          flow-monitor   mobility  olsr                spectrum               uan                 wscript
-brite         csma-layout   internet       mpi       openflow            stats                  virtual-net-device
-buildings     dsdv          internet-apps  ndnSIM    point-to-point      tap-bridge             visualizer
+antenna       click         dsr            lr-wpan   netanim             point-to-point-layout  test                wave<br>
+aodv          config-store  energy         lte       network             propagation            topology-read       wifi<br>
+applications  core          fd-net-device  mesh      nix-vector-routing  sixlowpan              traffic-control     wimax<br>
+bridge        csma          flow-monitor   mobility  olsr                spectrum               uan                 wscript<br>
+brite         csma-layout   internet       mpi       openflow            stats                  virtual-net-device<br>
+buildings     dsdv          internet-apps  ndnSIM    point-to-point      tap-bridge             visualizer<br>
 
 ## step 4:
 ```bash
